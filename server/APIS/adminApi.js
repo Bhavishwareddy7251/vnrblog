@@ -15,7 +15,7 @@ adminApp.get("/users", requireAuth({ signInUrl: "unauthorized" }), expressAsyncH
 
 adminApp.put("/users/:userId/delete", requireAuth({ signInUrl: "unauthorized" }), expressAsyncHandler(async (req, res) => {
     const userId = req.params.userId;
-    const updatedUser = await userAuthor.findByIdAndUpdate(userId, { isActive: false }, { returnOriginal: false });
+    const updatedUser = await userAuthor.findByIdAndUpdate(userId, { isActive:false }, { returnOriginal: false });
 
     if (!updatedUser) {
         return res.status(404).send({ message: "User not found" });

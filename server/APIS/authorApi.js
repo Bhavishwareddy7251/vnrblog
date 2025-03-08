@@ -12,7 +12,6 @@ authorApp.post("/author",expressAsyncHandler(createUserOrAuthor));
 
 // create article
 authorApp.post("/article",expressAsyncHandler(async(req,res)=>{
-
     const newArticleObj = req.body;
     const newArticle = new Article(newArticleObj);
     const articleObj = await newArticle.save();
