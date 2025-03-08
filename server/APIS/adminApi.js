@@ -8,14 +8,14 @@ require('dotenv').config();
 
 adminApp.post("/admin", expressAsyncHandler(createUserOrAuthor));
 
-adminApp.get("/users", requireAuth({ signInUrl: "unauthorized" }), expressAsyncHandler(async (req, res) => {
+adminApp.get("/users",expressAsyncHandler(async (req, res) => {
     const users = await userAuthor.find({});
-    res.status(200).send({ message: "Users fetched", payload: users });
+    res.status(200).send({ message: "Users fetched", payload: users});
 }));
 
-adminApp.put("/users/:userId/delete", requireAuth({ signInUrl: "unauthorized" }), expressAsyncHandler(async (req, res) => {
+adminApp.put("/users/:userId/delete", expressAsyncHandler(async (req, res) => {
     const userId = req.params.userId;
-    const updatedUser = await userAuthor.findByIdAndUpdate(userId, { isActive:false }, { returnOriginal: false });
+    const updatedUser = await userAuthor.findByIdAndUpdate(userId, { isActive:false}, { returnOriginal: false });
 
     if (!updatedUser) {
         return res.status(404).send({ message: "User not found" });
@@ -24,7 +24,7 @@ adminApp.put("/users/:userId/delete", requireAuth({ signInUrl: "unauthorized" })
     res.status(200).send({ message: "User deleted", payload: updatedUser });
 }));
 
-adminApp.put("/users/:userId/restore", requireAuth({ signInUrl: "unauthorized" }), expressAsyncHandler(async (req, res) => {
+adminApp.put("/users/:userId/restore",expressAsyncHandler(async (req, res) => {
     const userId = req.params.userId;
     const restoredUser = await userAuthor.findByIdAndUpdate(userId, { isActive: true }, { returnOriginal: false });
 

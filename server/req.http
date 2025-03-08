@@ -1,11 +1,11 @@
 ###
-GET http://localhost:3003/user-api/users
+GET http://localhost:3003/admin-api/users
 
 
 ### create author
 POST http://localhost:3003/author-api/author
 Content-Type: application/json
-
+    
 {
   "role": "author",
   "firstName": "author1",
